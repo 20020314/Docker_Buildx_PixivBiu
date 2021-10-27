@@ -9,7 +9,7 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev mu
     cp -r ./PixivBiu/app/ ./PixivBiu/.pkg/code/app/ && \
     cp ./PixivBiu/main.py ./PixivBiu/.pkg/code/ && \
     cp -r ./PixivBiu/usr/ ./PixivBiu/.pkg/public/usr/ && \
-    pip install -r requirements.txt && \
+    pip install -r ./PixivBiu/requirements.txt && \
     pip install pyinstaller  && \
     python3 ./PixivBiu/.pkg/py-pkger.py auto && \
     mv ./PixivBiu/.pkg/dist/* /Pixiv  && \
