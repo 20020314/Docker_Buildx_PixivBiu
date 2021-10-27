@@ -11,7 +11,7 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev li
     cp -r ./usr/ ./.pkg/public/usr/ && \
     pip install -r requirements.txt && \
     pip install pyinstaller  && \
-    python ./.pkg/py-pkger.py auto && \
+    python3 ./.pkg/py-pkger.py auto && \
     mv ./.pkg/dist/* /  && \
     pip freeze | grep -v "^-e" | xargs pip uninstall -y && \
     cd .. && \
@@ -35,4 +35,4 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1 \
     SPECIAL_MODE=
 EXPOSE 4001 6800 6888 6888/udp
 VOLUME /downloads /config.yml /usr/.token.json /config /downloads
-ENTRYPOINT ["python","/main.py"]
+ENTRYPOINT ["./main.py"]
