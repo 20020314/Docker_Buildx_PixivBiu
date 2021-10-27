@@ -13,7 +13,6 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev li
     pip install pyinstaller  && \
     python3 ./.pkg/py-pkger.py auto && \
     mv ./.pkg/dist/* /  && \
-    pip freeze | grep -v "^-e" | xargs pip uninstall -y && \
     cd .. && \
     rm -rf PixivBiu/ && \
     apk del python3 python3-dev py3-pip tzdata git gcc libc-dev linux-headers jpeg-dev zlib-dev bash curl && \
