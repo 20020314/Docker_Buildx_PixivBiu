@@ -1,6 +1,5 @@
 FROM alpine:latest
-RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev bash curl jq findutils && \
-    curl -fsSL git.io/aria2c.sh | bash && \
+RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
     git clone --depth=1 https://github.com/txperl/PixivBiu.git && \
     mkdir ./PixivBiu/.pkg/code && \
     mkdir ./PixivBiu/.pkg/public && \
@@ -14,23 +13,12 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev mu
     python3 ./PixivBiu/.pkg/py-pkger.py auto && \
     mv ./PixivBiu/.pkg/dist/* /Pixiv  && \
     rm -rf PixivBiu/ && \
-    apk del python3 python3-dev py3-pip tzdata git gcc libc-dev linux-headers jpeg-dev zlib-dev bash curl && \
+    apk del python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
+    apk autoremove && \
     rm -rf /var/cache/apk/* && \
     rm -rf /root/.cache && \
     rm -rf /tmp/*    
-COPY rootfs /
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1 \
-    RCLONE_CONFIG=/config/rclone.conf \
-    UPDATE_TRACKERS=true \
-    CUSTOM_TRACKER_URL= \
-    LISTEN_PORT=6888 \
-    RPC_PORT=6800 \
-    RPC_SECRET= \
-    PUID= PGID= \
-    DISK_CACHE= \
-    IPV6_MODE= \
-    UMASK_SET= \
-    SPECIAL_MODE=
-EXPOSE 4001 6800 6888 6888/udp
-VOLUME /downloads /config.yml /Pixiv/usr/.token.json /Pixiv/config /Pixiv/downloads
-ENTRYPOINT ["./Pixiv/main"]
+WORKDIR PixivBiu
+EXPOSE 4001
+VOLUME /Pixiv/usr/.token.json /Pixiv/config /Pixiv/downloads
+ENTRYPOINT ["./main"]
