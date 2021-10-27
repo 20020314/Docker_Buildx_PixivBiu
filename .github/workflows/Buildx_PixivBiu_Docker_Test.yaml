@@ -71,6 +71,4 @@ jobs:
           file: ./Dockerfile.test
           context: .
           push: true
-          tags: |
-            ${{ steps.prepare.outputs.tag_version }}
-            ${{ steps.prepare.outputs.tag_latest }}
+          tags: ${{ steps.prepare.outputs.tag_version }},${{ steps.prepare.outputs.tag_latest }}
