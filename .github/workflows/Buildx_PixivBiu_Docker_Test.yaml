@@ -4,10 +4,10 @@ name: Buildx_PixivBiu_Docker_Test
 on:
   # main分支的push操作会触发当前脚本的执行
   push:
-    branches: [ main ]
+    branches: [ master ]
   # main分支的pr操作会触发当前脚本的执行
 #  pull_request:
-#    branches: [ main ]
+#    branches: [ master ]
   # 定时任务,分时日月年,为国际标准时间16点,对应中国时间0点
 #  schedule:
 #    - cron: '0 16 * * *'
@@ -108,21 +108,21 @@ jobs:
               ${{ steps.prepare.outputs.tag_version }}-amd64 \
               --arch=amd64 \
               --os=linux  \
-              --os-version=p3terx/s6-alpine
+              --os-version=alpine:latest
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
               ${{ steps.prepare.outputs.tag_version }}-arm32v7  \
               --arch=arm  \
               --os=linux  \
               --variant=v7 \
-              --os-version=p3terx/s6-alpine
+              --os-version=alpine:latest
 
           docker manifest annotate ${{ steps.prepare.outputs.tag_version }} \
               ${{ steps.prepare.outputs.tag_version }}-arm64v8  \
               --arch=arm64  \
               --os=linux  \
               --variant=v8 \
-              --os-version=p3terx/s6-alpine
+              --os-version=alpine:latest
 
           docker manifest push ${{ steps.prepare.outputs.tag_version }}
 
@@ -136,20 +136,20 @@ jobs:
               ${{ steps.prepare.outputs.tag_latest }}-amd64 \
               --arch=amd64 \
               --os=linux  \
-              --os-version=p3terx/s6-alpine
+              --os-version=alpine:latest
           
           docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
               ${{ steps.prepare.outputs.tag_latest }}-arm32v7  \
               --arch=arm  \
               --os=linux  \
               --variant=v7 \
-              --os-version=p3terx/s6-alpine
+              --os-version=alpine:latest
 
           docker manifest annotate ${{ steps.prepare.outputs.tag_latest }} \
               ${{ steps.prepare.outputs.tag_latest }}-arm64v8  \
               --arch=arm64  \
               --os=linux  \
               --variant=v8 \
-              --os-version=p3terx/s6-alpine
+              --os-version=alpine:latest
 
           docker manifest push ${{ steps.prepare.outputs.tag_latest }}
