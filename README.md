@@ -38,3 +38,9 @@ docker run -d \
 /PixivBiu/config.yml                 配置文件(必须映射)
 
 /PivixBiu/usr/.token.json            Token 存放位置(必须映射)
+
+# TODO
+
+- [] 精简镜像大小
+
+- [] 内置Aria2
