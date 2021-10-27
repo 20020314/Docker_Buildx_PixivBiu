@@ -63,12 +63,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       # 构建并且推送
-      - name: Build and push
+      - name: Build and Push
         if: "contains(github.event.head_commit.message, 'test')"
         uses: docker/build-push-action@v2
         with:
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x,linux/ppc64le
-          file: ./Dockerfile
+          file: ./Dockerfile.test
           context: .
           push: true
           tags: |
