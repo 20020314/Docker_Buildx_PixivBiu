@@ -12,8 +12,8 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev li
     pip install -r requirements.txt && \
     pip install pyinstaller  && \
     python3 ./.pkg/py-pkger.py auto && \
-    mv ./.pkg/dist/* /  && \
-    cd .. && \
+    mv ./.pkg/dist/* /Pixiv  && \
+    cd / && \
     rm -rf PixivBiu/ && \
     apk del python3 python3-dev py3-pip tzdata git gcc libc-dev linux-headers jpeg-dev zlib-dev bash curl && \
     rm -rf /var/cache/apk/* && \
@@ -33,5 +33,5 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1 \
     UMASK_SET= \
     SPECIAL_MODE=
 EXPOSE 4001 6800 6888 6888/udp
-VOLUME /downloads /config.yml /usr/.token.json /config /downloads
-ENTRYPOINT ["./main.py"]
+VOLUME /downloads /config.yml /Pixiv/usr/.token.json /Pixiv/config /Pixiv/downloads
+ENTRYPOINT ["./Pixiv/main"]
