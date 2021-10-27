@@ -41,6 +41,6 @@ docker run -d \
 
 # TODO
 
-- [ ] 精简镜像大小
+- [x] 精简镜像大小
 
 - [ ] 内置Aria2
