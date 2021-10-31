@@ -1,16 +1,28 @@
-FROM python:3.7.12-alpine3.14
-RUN apk add -U --no-cache tzdata git gcc libc-dev linux-headers jpeg-dev zlib-dev && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone && \
+FROM alpine:latest
+RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
     git clone --depth=1 https://github.com/txperl/PixivBiu.git && \
-    cd /PixivBiu && \
-    rm config.yml && \
-    pip install -r requirements.txt && \
-    apk del tzdata git libc-dev linux-headers && \
+    mkdir Pixiv && \
+    mkdir /PixivBiu/.pkg/code && \
+    mkdir /PixivBiu/.pkg/public && \
+    cp -r /PixivBiu/altfe/ /PixivBiu/.pkg/code/altfe/ && \
+    cp -r /PixivBiu/app/ /PixivBiu/.pkg/code/app/ && \
+    cp /PixivBiu/main.py /PixivBiu/.pkg/code/ && \
+    cp -r /PixivBiu/usr/ /PixivBiu/.pkg/public/usr/ && \
+    cp /PixivBiu/config.yml /PixivBiu/.pkg/public/ && \
+    cp /PixivBiu/LICENSE /PixivBiu/.pkg/public/ && \
+    cp /PixivBiu/README.md /PixivBiu/.pkg/public/ && \
+    pip install -r /PixivBiu/requirements.txt && \
+    pip install pyinstaller  && \
+    python3 /PixivBiu/.pkg/py-pkger.py auto && \
+    mv /PixivBiu/.pkg/dist/* /Pixiv  && \
+    rm -rf PixivBiu/ && \
+    rm /Pixiv/config.yml && \
+    rm /Pixiv/LICENSE && \
+    rm /Pixiv/README.md && \
+    apk del python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
     rm -rf /var/cache/apk/* && \
     rm -rf /root/.cache && \
-    rm -rf /tmp/*
-WORKDIR /PixivBiu
+    rm -rf /tmp/* 
 EXPOSE 4001
-VOLUME /PixivBiu/downloads /PixivBiu/config.yml /PixivBiu/usr/.token.json
-ENTRYPOINT ["python","main.py"]
+VOLUME /Pixiv/usr/.token.json /Pixiv/config.yml /Pixiv/downloads
+ENTRYPOINT ["/Pixiv/main"]

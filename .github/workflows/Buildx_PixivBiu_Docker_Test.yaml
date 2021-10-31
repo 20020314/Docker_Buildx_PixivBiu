@@ -20,10 +20,10 @@ jobs:
   Buildx_PixivBiu_Docker_Test:
     # 运行在Ubuntu系统上
     runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, 'test')"
     # 步骤
     steps:
       - name: Prepare
-        if: "contains(github.event.head_commit.message, 'test')"
         id: prepare
         # IMAGE_NAME ： 镜像名称
         # VERSION ： 源码版本
@@ -43,28 +43,23 @@ jobs:
           echo ::set-output name=tag_latest::${TAG_LATEST}
       # 切换到主分支
       - name: Checkout
-        if: "contains(github.event.head_commit.message, 'test')"
         uses: actions/checkout@main
 
       - name: Set up QEMU
-        if: "contains(github.event.head_commit.message, 'test')"
         uses: docker/setup-qemu-action@v1
 
       # 初始化Docker Buildx
       - name: Set up Docker Buildx
-        if: "contains(github.event.head_commit.message, 'test')"
         uses: docker/setup-buildx-action@v1
 
       # 登录到DockerHub
       - name: Login to DockerHub
-        if: "contains(github.event.head_commit.message, 'test')"
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       # 构建并且推送
       - name: Build and Push
-        if: "contains(github.event.head_commit.message, 'test')"
         uses: docker/build-push-action@v2
         with:
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x,linux/ppc64le
