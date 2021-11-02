@@ -9,7 +9,7 @@
 本项目使用Docker Buildx构建全平台镜像，支持linux/386、linux/amd64、linux/armv6、inux/armv7、linux/armv8、linux/ppc64le、linux/s390x框架，并使用python:3.7.12-alpine3.14作为底包
 
 
-使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，由源码构建时间大概45分钟
+使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，由源码构建时间大概1小时
 
 # 使用方式
 
@@ -30,25 +30,6 @@ docker run -d \
     -v 本级路径:/PixivBiu/usr/.token.json \
     zzcabc/pixivbiu:latest
 ```
-### 在2.1.2a之后(不包括2.1.2a)版本将使用pyinstaller进行打包，并采用alpine:latest作为底包，同样全框架进行构建，镜像体积缩减至40M，构建时间大约需要1小时
-
-在2.1.2a之后版本改为
-
-```sh
-docker run -d \
-    --name pixivbiu \
-    -p 本机端口:4001 \
-    -v 本机路径:/Pixiv/config.yml \
-    -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
-    zzcabc/pixivbiu:latest
-```
-
-/Pixiv/downloads                  图片下载地址
-
-/Pixiv/config.yml                 配置文件(必须映射)
-
-/Pixiv/usr/.token.json            Token 存放位置(必须映射)
 
 # 映射路径说明
 
@@ -59,6 +40,42 @@ docker run -d \
 /PixivBiu/config.yml                 配置文件(必须映射)
 
 /PixivBiu/usr/.token.json            Token 存放位置(必须映射)
+
+
+# 注意
+### 在2.1.2a之后(不包括2.1.2a)版本将使用pyinstaller和源码编译两种方式进行打包，pyinstaller构建采用alpine:latest作为底包，镜像体积缩减至40M；源码编译采用python:3.7.12-alpine3.14作为底包，镜像体积为140M+，构建时间大约需要2小时
+
+在2.1.2a之后版本改为
+
+pyinstaller使用方式
+
+```sh
+docker run -d \
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -v 本机路径:/Pixiv/config.yml \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    zzcabc/pixivbiu
+```
+
+源码编译使用方式
+
+```sh
+docker run -d \
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -v 本机路径:/Pixiv/config.yml \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    zzcabc/pixivbiu:latest-src
+```
+
+/Pixiv/downloads                  图片下载地址
+
+/Pixiv/config.yml                 配置文件(必须映射)
+
+/Pixiv/usr/.token.json            Token 存放位置(必须映射)
 
 # TODO
 

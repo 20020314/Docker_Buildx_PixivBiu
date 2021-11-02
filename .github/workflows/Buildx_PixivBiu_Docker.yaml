@@ -27,8 +27,8 @@ jobs:
         # IMAGE_NAME ： 镜像名称
         # VERSION ： 源码版本
         # DOCKERHUB_VERSION ： DockerHub 镜像版本
-        # TAG_VERSION ： 标签版本
-        # TAG_LATEST ： 最新版本
+        # TAG_VERSION ： 标签版本 zzcabc/pixivbiu:2.1.2a
+        # TAG_LATEST ： 最新版本 zzcabc/pixivbiu:latest
         run: |
           IMAGE_NAME=pixivbiu
           VERSION=$(curl -sX GET "https://api.github.com/repos/txperl/PixivBiu/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
@@ -62,12 +62,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       # 构建并且推送
-      - name: Build and Push
+      - name: BuildPyinstaller and Push
         if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/build-push-action@v2
         with:
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x,linux/ppc64le
-          file: ./Dockerfile
+          file: ./Dockerfile.pyinstallerbuild
           context: .
           push: true
           tags: ${{ steps.prepare.outputs.tag_version }},${{ steps.prepare.outputs.tag_latest }}
+      # 构建并且推送
+      - name: BuildSrc and Push
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x,linux/ppc64le
+          file: ./Dockerfile.srcbuild
+          context: .
+          push: true
+          tags: ${{ steps.prepare.outputs.tag_version }}-src,${{ steps.prepare.outputs.tag_latest }}-src
