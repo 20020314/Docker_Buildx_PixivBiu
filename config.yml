@@ -3,7 +3,7 @@
 # You can use the translation tool to read it, for now.
 
 ## 系统相关 ##
-sys.host: "0.0.0.1:4001"
+sys.host: "0.0.0.0:4001"
   # 程序运行的地址，如果不是很懂请不要修改 docker运行绝对不能修改
   # 不可带有 http:// 前缀
 
