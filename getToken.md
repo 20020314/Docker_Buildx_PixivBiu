@@ -4,10 +4,10 @@
 
 第三步：开启「Preserve log / 持续记录」
 
-第四步：在「Filter / 筛选」文本框中输入「callback?
+第四步：在「Filter / 筛选」文本框中输入「callback?」
 
 第五步：登录您的 Pixiv 账号
 
 第六步：成功登录后，会出现一个类似「https://app-api.pixiv.net/.../callback?state=...&code=****************」的字段
 
-第七步：将复制code后面*******，复制到.token.json的对应位置
+第七步：将复制code后面*******，复制到[.token.json](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/.token.json)的对应位置
