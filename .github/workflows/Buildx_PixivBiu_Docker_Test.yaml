@@ -54,7 +54,6 @@ jobs:
       
       # 登录到DockerHub
       - name: Login to DockerHub
-        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.build_args }}
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
