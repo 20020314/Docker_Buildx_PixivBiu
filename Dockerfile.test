@@ -25,7 +25,7 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev mu
     rm -rf /tmp/* 
 EXPOSE 4002
 ENV sys.host="0.0.0.0:4001" \
-    sys.debug=false \
+    sys.debug="false" \
     sys.api="public" \
     sys.proxy="" \
     sys.language="" \
