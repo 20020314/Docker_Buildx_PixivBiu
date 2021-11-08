@@ -36,7 +36,7 @@ ENV sys.host="0.0.0.0:4001" \
     biu.download.mode="dl-single" \
     biu.download.aria2Host="localhost:6800" \
     biu.download.aria2Secret="" \
-    biu.download.maxDownloading= 8 \
+    biu.download.maxDownloading 8 \
     biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
     biu.download.saveFileName="{title}_{work_id}" \
     biu.download.autoArchive="true" \
