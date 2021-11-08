@@ -60,6 +60,7 @@ docker run -d \
 **上游问题 下方两项无法使用**
 
    -e biu.search.maxThreads=8
+   
    -e biu.download.maxDownloading=8
 
 **{ROOTPATH}/downloads路径不能修改**
