@@ -22,7 +22,7 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev mu
     apk del python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
     rm -rf /var/cache/apk/* && \
     rm -rf /root/.cache && \
-    rm -rf /tmp/* 
+    rm -rf /tmp/*
 EXPOSE 4001
 ENV sys.host="0.0.0.0:4001" \
     sys.debug="false" \
