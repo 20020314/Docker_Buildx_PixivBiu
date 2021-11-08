@@ -53,14 +53,14 @@ docker run -d \
 测试项目目前提供支持传入环境变量形式，等待上游更新完成将可全部可用，如果你使用了环境变量创建容器，可用不需要传入config.yml
 
 
-**需要注意sys.host虽然提供，但是不支持更改**
+**需要注意sys.host虽然可以修改，但是不建议更改**
 
    -e sys.host="0.0.0.0:4001"
 
 **上游问题 下方两项无法使用**
 
    -e biu.search.maxThreads=8
-   
+
    -e biu.download.maxDownloading=8
 
 **{ROOTPATH}/downloads路径不能修改**
