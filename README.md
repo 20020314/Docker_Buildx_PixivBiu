@@ -47,6 +47,62 @@ docker run -d \
 
 /Pixiv/usr/.token.json            Token 存放位置(必须映射)
 
+
+# [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)
+
+测试项目目前提供支持传入环境变量形式，等待上游更新完成将可全部可用，如果你使用了环境变量创建容器，可用不需要传入config.yml
+
+
+**需要注意sys.host虽然提供，但是不支持更改**
+
+   -e sys.host="0.0.0.0:4001"
+
+**上游问题 下方两项无法使用**
+
+   -e biu.search.maxThreads=8
+   -e biu.download.maxDownloading=8
+
+**{ROOTPATH}/downloads路径不能修改**
+
+   -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"
+
+
+```sh
+docker run -d \
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -e sys.isDebug=false \
+    -e sys.api="public" \
+    -e sys.proxy"" \
+    -e sys.language="" \
+    -e sys.theme="multiverse" \
+    -e sys.autoOpen=true \
+    -e biu.search.loadCacheFirst=true \
+    -e biu.download.mode="dl-single" \
+    -e biu.download.aria2Host="localhost:6800" \
+    -e biu.download.aria2Secret="" \
+    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
+    -e biu.download.saveFileName="{title}_{work_id}" \
+    -e biu.download.autoArchive=true \
+    -e biu.download.autoDeterTheSame=true \
+    -e biu.download.whatsUgoira="webp" \
+    -e biu.download.imageHost="" \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    zzcabc/pixivbiu-test
+```
+
+**如果你使用了-e传参，即可不需要config.yml；当然，你也可以使用下方命令启动容器**
+
+```sh
+docker run -d \
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    zzcabc/pixivbiu-test
+```
+
 # TODO
 
 - [x] 精简镜像大小
