@@ -26,21 +26,29 @@ jobs:
       - name: Prepare
         id: prepare
         # IMAGE_NAME ： 镜像名称
-        # VERSION ： 源码版本
+        # ALI_ADD ：阿里镜像地址
+        # GITHUB_VERSION ： 源码版本
         # DOCKERHUB_VERSION ： DockerHub 镜像版本
-        # TAG_VERSION ： 标签版本
-        # TAG_LATEST ： 最新版本
+        # TAG_VERSION ： 标签版本 zzcabc/pixivbiu-test:2.2.0a
+        # TAG_LATEST ： 最新版本 zzcabc/pixivbiu-test:latest
+        # ALI_VERSION ：
+        # ALI_LATEST :
         run: |
           IMAGE_NAME=pixivbiu-test
-          VERSION=$(curl -sX GET "https://api.github.com/repos/txperl/PixivBiu/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
+          ALI_ADD=registry.cn-hangzhou.aliyuncs.com
+          GITHUB_VERSION=$(curl -sX GET "https://api.github.com/repos/txperl/PixivBiu/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
           DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v2/repositories/zzcabc/pixivbiu-test/tags" | awk '{print $610;exit}' FS='[""]')
-          TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${VERSION}"
+          TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${GITHUB_VERSION}"
           TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
+          ALI_VERSION="${ALI_ADD}/${{ secrets.ALIYUN_NAMESPACES }}/${IMAGE_NAME}:${GITHUB_VERSION}"
+          ALI_LATEST="${ALI_ADD}/${{ secrets.ALIYUN_NAMESPACES }}/${IMAGE_NAME}:latest"
           echo ::set-output name=image_name::${IMAGE_NAME}
-          echo ::set-output name=build_args::${VERSION}
+          echo ::set-output name=build_args::${GITHUB_VERSION}
           echo ::set-output name=dockerhub_version::${DOCKERHUB_VERSION}
           echo ::set-output name=tag_version::${TAG_VERSION}
           echo ::set-output name=tag_latest::${TAG_LATEST}
+          echo ::set-output name=ali_version::${ALI_VERSION}
+          echo ::set-output name=ali_latest::${ALI_LATEST}
       # 切换到主分支
       - name: Checkout
         uses: actions/checkout@main
@@ -58,6 +66,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      # 登录到阿里镜像仓库
+      - name: Login To Alibaba Cloud Container Registry
+        run: |
+          docker login -u ${{ secrets.ALIYUN_USERNAME }} -p ${{ secrets.ALIYUN_PWD }} registry.cn-hangzhou.aliyuncs.com
 
       # 构建并且推送
       - name: Build and Push
@@ -67,4 +80,9 @@ jobs:
           file: ./Dockerfile.test
           context: .
           push: true
-          tags: ${{ steps.prepare.outputs.tag_version }},${{ steps.prepare.outputs.tag_latest }}
+          tags: |
+            ${{ steps.prepare.outputs.tag_version }}
+            ${{ steps.prepare.outputs.tag_latest }}
+            ${{ steps.prepare.outputs.ali_version }}
+            ${{ steps.prepare.outputs.ali_latest }}
+            
