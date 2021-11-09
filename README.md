@@ -6,7 +6,7 @@
 
 源码编译采用python:3.7.12-alpine3.14作为底包，镜像体积为180M+
 
-使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，由构建时间大约需要2小时
+使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，构建时间大约需要**2小时**
 
 # 使用方式
 
@@ -16,7 +16,7 @@
 
 [点击查看token的获取方式](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/getToken.md)
 
-### pyinstaller使用方式
+## pyinstaller构建镜像的使用方式（默认拉取）
 
 ```sh
 docker run -d \
@@ -28,7 +28,38 @@ docker run -d \
     zzcabc/pixivbiu:latest
 ```
 
-### 源码编译使用方式
+### 将在2.2.0a版本之后使用 
+
+### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
+
+```sh
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -e sys.debug=false \
+    -e sys.api=public \
+    -e sys.proxy= \
+    -e sys.language= \
+    -e sys.theme=multiverse \
+    -e sys.autoOpen=true \
+    -e biu.search.maxThreads=8 \
+    -e biu.search.loadCacheFirst=true \
+    -e biu.download.mode=dl-single \
+    -e biu.download.aria2Host="localhost:6800" \
+    -e biu.download.aria2Secret="" \
+    -e biu.download.maxDownloading=8 \
+    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
+    -e biu.download.saveFileName="{title}_{work_id}" \
+    -e biu.download.autoArchive=true \
+    -e biu.download.autoDeterTheSame=true \
+    -e biu.download.whatsUgoira=webp \
+    -e biu.download.imageHost="" \
+    -v 本机路径:/Pixiv/config.yml \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    zzcabc/pixivbiu:latest
+```
+
+## 源码编译构建镜像的使用方式
 
 ```sh
 docker run -d \
@@ -40,15 +71,108 @@ docker run -d \
     zzcabc/pixivbiu:latest-src
 ```
 
+### 将在2.2.0a版本之后使用 
+
+```sh
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -e sys.debug=false \
+    -e sys.api=public \
+    -e sys.proxy= \
+    -e sys.language= \
+    -e sys.theme=multiverse \
+    -e sys.autoOpen=true \
+    -e biu.search.maxThreads=8 \
+    -e biu.search.loadCacheFirst=true \
+    -e biu.download.mode=dl-single \
+    -e biu.download.aria2Host="localhost:6800" \
+    -e biu.download.aria2Secret="" \
+    -e biu.download.maxDownloading=8 \
+    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
+    -e biu.download.saveFileName="{title}_{work_id}" \
+    -e biu.download.autoArchive=true \
+    -e biu.download.autoDeterTheSame=true \
+    -e biu.download.whatsUgoira=webp \
+    -e biu.download.imageHost="" \
+    -v 本机路径:/Pixiv/config.yml \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    zzcabc/pixivbiu:latest-src
+```
+
+## 阿里镜像仓库，pyinstaller构建镜像（2.2.0a之后版本）
+
+### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
+
+```sh
+docker run -d \
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -e sys.debug=false \
+    -e sys.api=public \
+    -e sys.proxy= \
+    -e sys.language= \
+    -e sys.theme=multiverse \
+    -e sys.autoOpen=true \
+    -e biu.search.maxThreads=8 \
+    -e biu.search.loadCacheFirst=true \
+    -e biu.download.mode=dl-single \
+    -e biu.download.aria2Host="localhost:6800" \
+    -e biu.download.aria2Secret="" \
+    -e biu.download.maxDownloading=8 \
+    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
+    -e biu.download.saveFileName="{title}_{work_id}" \
+    -e biu.download.autoArchive=true \
+    -e biu.download.autoDeterTheSame=true \
+    -e biu.download.whatsUgoira=webp \
+    -e biu.download.imageHost="" \
+    -v 本机路径:/Pixiv/config.yml \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest
+```
+
+## 阿里镜像仓库，源码编译构建镜像
+
+```sh
+docker run -d \
+    --name pixivbiu \
+    -p 本机端口:4001 \
+    -e sys.debug=false \
+    -e sys.api=public \
+    -e sys.proxy= \
+    -e sys.language= \
+    -e sys.theme=multiverse \
+    -e sys.autoOpen=true \
+    -e biu.search.maxThreads=8 \
+    -e biu.search.loadCacheFirst=true \
+    -e biu.download.mode=dl-single \
+    -e biu.download.aria2Host="localhost:6800" \
+    -e biu.download.aria2Secret="" \
+    -e biu.download.maxDownloading=8 \
+    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
+    -e biu.download.saveFileName="{title}_{work_id}" \
+    -e biu.download.autoArchive=true \
+    -e biu.download.autoDeterTheSame=true \
+    -e biu.download.whatsUgoira=webp \
+    -e biu.download.imageHost="" \
+    -v 本机路径:/Pixiv/config.yml \
+    -v 本机路径:/Pixiv/downloads \
+    -v 本级路径:/Pixiv/usr/.token.json \
+    registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest
+```
+
 # 映射路径说明
 
 此说明对应Docker容器内
 
 `/Pixiv/downloads`                  图片下载地址
 
-`/Pixiv/config.yml`                配置文件(必须映射)
+`/Pixiv/config.yml`                 配置文件(必须映射)
 
-`/Pixiv/usr/.token.json`           Token 存放位置(必须映射)
+`/Pixiv/usr/.token.json`            Token 存放位置(必须映射)
+
+
 
 # [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)
 
@@ -56,7 +180,7 @@ docker run -d \
 
 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)
 
-**需要注意sys.host虽然可以修改，但是不建议更改**
+**需要注意sys.host虽然可以传入，但是不建议更改，如果更改无法使用概不负责**
 
    `-e sys.host="0.0.0.0:4001"`
 
@@ -86,7 +210,7 @@ docker run -d \
     -e biu.download.autoArchive=true \
     -e biu.download.autoDeterTheSame=true \
     -e biu.download.whatsUgoira=webp \
-    -e biu.download.imageHost=
+    -e biu.download.imageHost=""
     -v 本机路径:/Pixiv/downloads \
     -v 本级路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu-test
@@ -109,4 +233,4 @@ docker run -d \
 
 - [ ] 内置Aria2
 
-- [ ] 上传阿里镜像仓库
+- [x] 上传阿里镜像仓库

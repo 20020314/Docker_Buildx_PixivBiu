@@ -42,8 +42,7 @@ jobs:
           TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
           ALI_VERSION="${ALI_ADD}/${{ secrets.ALIYUN_NAMESPACES }}/${IMAGE_NAME}:${GITHUB_VERSION}"
           ALI_LATEST="${ALI_ADD}/${{ secrets.ALIYUN_NAMESPACES }}/${IMAGE_NAME}:latest"
-          echo ::set-output name=image_name::${IMAGE_NAME}
-          echo ::set-output name=build_args::${GITHUB_VERSION}
+          echo ::set-output name=github_version::${GITHUB_VERSION}
           echo ::set-output name=dockerhub_version::${DOCKERHUB_VERSION}
           echo ::set-output name=tag_version::${TAG_VERSION}
           echo ::set-output name=tag_latest::${TAG_LATEST}
@@ -85,4 +84,3 @@ jobs:
             ${{ steps.prepare.outputs.tag_latest }}
             ${{ steps.prepare.outputs.ali_version }}
             ${{ steps.prepare.outputs.ali_latest }}
-            
