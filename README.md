@@ -57,12 +57,6 @@ docker run -d \
 
    -e sys.host="0.0.0.0:4001"
 
-**上游问题 下方两项无法使用**
-
-   -e biu.search.maxThreads=8
-
-   -e biu.download.maxDownloading=8
-
 **{ROOTPATH}/downloads路径不能修改**
 
    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"
@@ -72,22 +66,24 @@ docker run -d \
 docker run -d \
     --name pixivbiu \
     -p 本机端口:4001 \
-    -e sys.isDebug=false \
-    -e sys.api="public" \
-    -e sys.proxy"" \
-    -e sys.language="" \
-    -e sys.theme="multiverse" \
+    -e sys.debug=false \
+    -e sys.api=public \
+    -e sys.proxy= \
+    -e sys.language= \
+    -e sys.theme=multiverse \
     -e sys.autoOpen=true \
+    -e biu.search.maxThreads=8 \
     -e biu.search.loadCacheFirst=true \
-    -e biu.download.mode="dl-single" \
+    -e biu.download.mode=dl-single \
     -e biu.download.aria2Host="localhost:6800" \
     -e biu.download.aria2Secret="" \
+    -e biu.download.maxDownloading=8 \
     -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
     -e biu.download.saveFileName="{title}_{work_id}" \
     -e biu.download.autoArchive=true \
     -e biu.download.autoDeterTheSame=true \
-    -e biu.download.whatsUgoira="webp" \
-    -e biu.download.imageHost="" \
+    -e biu.download.whatsUgoira=webp \
+    -e biu.download.imageHost=
     -v 本机路径:/Pixiv/downloads \
     -v 本级路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu-test
@@ -109,3 +105,5 @@ docker run -d \
 - [x] 精简镜像大小
 
 - [ ] 内置Aria2
+
+- [ ] 上传阿里镜像仓库
