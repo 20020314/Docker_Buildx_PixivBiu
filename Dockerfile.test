@@ -25,20 +25,22 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev mu
     rm -rf /tmp/*
 EXPOSE 4001
 ENV sys.host="0.0.0.0:4001" \
-    sys.debug="false" \
-    sys.api="public" \
-    sys.proxy="" \
-    sys.language="" \
-    sys.theme="multiverse" \
-    sys.autoOpen="true" \
-    biu.search.loadCacheFirst="true" \
-    biu.download.mode="dl-single" \
+    sys.debug=false \
+    sys.api=public \
+    sys.proxy= \
+    sys.language= \
+    sys.theme=multiverse \
+    sys.autoOpen=true \
+    biu.search.maxThreads=8 \
+    biu.search.loadCacheFirst=true \
+    biu.download.mode=dl-single \
     biu.download.aria2Host="localhost:6800" \
     biu.download.aria2Secret="" \
+    biu.download.maxDownloading=8 \
     biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
     biu.download.saveFileName="{title}_{work_id}" \
-    biu.download.autoArchive="true" \
-    biu.download.autoDeterTheSame="true" \
-    biu.download.whatsUgoira="webp" \
-    biu.download.imageHost=""
+    biu.download.autoArchive=true \
+    biu.download.autoDeterTheSame=true \
+    biu.download.whatsUgoira=webp \
+    biu.download.imageHost=
 ENTRYPOINT ["/Pixiv/main"]
