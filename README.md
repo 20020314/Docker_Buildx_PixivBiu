@@ -1,6 +1,10 @@
 # [Docker_Buildx_PixivBiu](https://hub.docker.com/r/zzcabc/pixivbiu) <-点击跳转DockerHub
 
-本项目使用Docker Buildx构建全平台镜像，支持linux/386、linux/amd64、linux/armv6、inux/armv7、linux/armv8、linux/ppc64le、linux/s390x框架，使用pyinstaller和源码编译两种方式进行打包，pyinstaller构建采用alpine:latest作为底包，镜像体积缩减至40M；源码编译采用python:3.7.12-alpine3.14作为底包，镜像体积为180M+
+本项目使用Docker Buildx构建全平台镜像，支持linux/386、linux/amd64、linux/armv6、inux/armv7、linux/armv8、linux/ppc64le、linux/s390x框架；
+
+使用pyinstaller和源码编译两种方式进行打包，pyinstaller构建采用alpine:latest作为底包，镜像体积缩减至40M；
+
+源码编译采用python:3.7.12-alpine3.14作为底包，镜像体积为180M+
 
 使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，由构建时间大约需要2小时
 
@@ -36,30 +40,29 @@ docker run -d \
     zzcabc/pixivbiu:latest-src
 ```
 
-
 # 映射路径说明
 
 此说明对应Docker容器内
 
-/Pixiv/downloads                  图片下载地址
+`/Pixiv/downloads`                  图片下载地址
 
-/Pixiv/config.yml                 配置文件(必须映射)
+`/Pixiv/config.yml`                配置文件(必须映射)
 
-/Pixiv/usr/.token.json            Token 存放位置(必须映射)
-
+`/Pixiv/usr/.token.json`           Token 存放位置(必须映射)
 
 # [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)
 
 测试项目目前提供支持传入环境变量形式，等待上游更新完成将可全部可用，如果你使用了环境变量创建容器，可用不需要传入config.yml
 
+环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)
 
 **需要注意sys.host虽然可以修改，但是不建议更改**
 
-   -e sys.host="0.0.0.0:4001"
+   `-e sys.host="0.0.0.0:4001"`
 
 **{ROOTPATH}/downloads路径不能修改**
 
-   -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"
+   `-e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"`
 
 
 ```sh
