@@ -35,7 +35,7 @@ jobs:
         run: |
           IMAGE_NAME=pixivbiu
           ALI_ADD=registry.cn-hangzhou.aliyuncs.com
-          VERSION=$(curl -sX GET "https://api.github.com/repos/txperl/PixivBiu/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
+          GITHUB_VERSION=$(curl -sX GET "https://api.github.com/repos/txperl/PixivBiu/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
           DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v2/repositories/zzcabc/pixivbiu/tags" | awk '{print $1230;exit}' FS='[""]')
           TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${GITHUB_VERSION}"
           TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
@@ -71,6 +71,7 @@ jobs:
 
       # 登录到阿里镜像仓库
       - name: Login To Alibaba Cloud Container Registry
+        if: ${{ steps.prepare.outputs.dockerhub_version != steps.prepare.outputs.github_version }}
         run: |
           docker login -u ${{ secrets.ALIYUN_USERNAME }} -p ${{ secrets.ALIYUN_PWD }} registry.cn-hangzhou.aliyuncs.com
 
