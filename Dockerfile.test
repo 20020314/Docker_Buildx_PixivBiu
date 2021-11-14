@@ -1,6 +1,6 @@
 FROM alpine:latest
 RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
-    git clone --depth=1 https://github.com/txperl/PixivBiu.git && \
+    git clone https://github.com/txperl/PixivBiu.git && \
     mkdir Pixiv && \
     mkdir /PixivBiu/.pkg/code && \
     mkdir /PixivBiu/.pkg/public && \
