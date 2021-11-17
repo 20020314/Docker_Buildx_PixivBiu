@@ -18,6 +18,8 @@
 
 ## pyinstaller构建镜像的使用方式（默认拉取）
 
+
+
 ```sh
 docker run -d \
     --name pixivbiu \
@@ -29,6 +31,8 @@ docker run -d \
 ```
 
 ### 将在2.2.0a版本之后使用 
+
+国内镜像地址：将 `zzcabc/pixivbiu:latest` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest`
 
 ### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
 
@@ -61,6 +65,8 @@ docker run -d \
 
 ## 源码编译构建镜像的使用方式
 
+国内镜像地址：将 `zzcabc/pixivbiu:latest-src` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu-src:latest`
+
 ```sh
 docker run -d \
     --name pixivbiu \
@@ -98,68 +104,6 @@ docker run -d \
     -v 本机路径:/Pixiv/downloads \
     -v 本级路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu:latest-src
-```
-
-## 阿里镜像仓库，pyinstaller构建镜像（2.2.0a之后版本）
-
-### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
-
-```sh
-docker run -d \
-    --name pixivbiu \
-    -p 本机端口:4001 \
-    -e sys.debug=false \
-    -e sys.api=public \
-    -e sys.proxy= \
-    -e sys.language= \
-    -e sys.theme=multiverse \
-    -e sys.autoOpen=true \
-    -e biu.search.maxThreads=8 \
-    -e biu.search.loadCacheFirst=true \
-    -e biu.download.mode=dl-single \
-    -e biu.download.aria2Host="localhost:6800" \
-    -e biu.download.aria2Secret="" \
-    -e biu.download.maxDownloading=8 \
-    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
-    -e biu.download.saveFileName="{title}_{work_id}" \
-    -e biu.download.autoArchive=true \
-    -e biu.download.autoDeterTheSame=true \
-    -e biu.download.whatsUgoira=webp \
-    -e biu.download.imageHost="" \
-    -v 本机路径:/Pixiv/config.yml \
-    -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
-    registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest
-```
-
-## 阿里镜像仓库，源码编译构建镜像
-
-```sh
-docker run -d \
-    --name pixivbiu \
-    -p 本机端口:4001 \
-    -e sys.debug=false \
-    -e sys.api=public \
-    -e sys.proxy= \
-    -e sys.language= \
-    -e sys.theme=multiverse \
-    -e sys.autoOpen=true \
-    -e biu.search.maxThreads=8 \
-    -e biu.search.loadCacheFirst=true \
-    -e biu.download.mode=dl-single \
-    -e biu.download.aria2Host="localhost:6800" \
-    -e biu.download.aria2Secret="" \
-    -e biu.download.maxDownloading=8 \
-    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
-    -e biu.download.saveFileName="{title}_{work_id}" \
-    -e biu.download.autoArchive=true \
-    -e biu.download.autoDeterTheSame=true \
-    -e biu.download.whatsUgoira=webp \
-    -e biu.download.imageHost="" \
-    -v 本机路径:/Pixiv/config.yml \
-    -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
-    registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest
 ```
 
 # 映射路径说明
