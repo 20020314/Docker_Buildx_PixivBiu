@@ -12,13 +12,19 @@
 
 在启动镜像之前，你需要准备[config.yml](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/config.yml)配置文件以及[.token.json](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/.token.json)的用户登录token
 
+**需要注意sys.host虽然可以传入，但是不建议更改，如果更改无法使用概不负责**
+
+   `-e sys.host="0.0.0.0:4001"`
+
+**{ROOTPATH}/downloads路径不能修改**
+
+   `-e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"`
+
 将本项目的[config.yml](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/config.yml)直接可用
 
 [点击查看token的获取方式](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/getToken.md)
 
 ## pyinstaller构建镜像的使用方式（默认拉取）
-
-
 
 ```sh
 docker run -d \
@@ -116,22 +122,11 @@ docker run -d \
 
 `/Pixiv/usr/.token.json`            Token 存放位置(必须映射)
 
-
-
 # [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)
 
 测试项目目前提供支持传入环境变量形式，等待上游更新完成将可全部可用，如果你使用了环境变量创建容器，可用不需要传入config.yml
 
 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)
-
-**需要注意sys.host虽然可以传入，但是不建议更改，如果更改无法使用概不负责**
-
-   `-e sys.host="0.0.0.0:4001"`
-
-**{ROOTPATH}/downloads路径不能修改**
-
-   `-e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"`
-
 
 ```sh
 docker run -d \

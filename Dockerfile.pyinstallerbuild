@@ -24,23 +24,5 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev mu
     rm -rf /root/.cache && \
     rm -rf /tmp/*
 EXPOSE 4001
-ENV sys.host="0.0.0.0:4001" \
-    sys.debug="" \
-    sys.api="" \
-    sys.proxy="" \
-    sys.language="" \
-    sys.theme="" \
-    sys.autoOpen="false" \
-    biu.search.maxThreads="" \
-    biu.search.loadCacheFirst="" \
-    biu.download.mode="" \
-    biu.download.aria2Host="" \
-    biu.download.aria2Secret="" \
-    biu.download.maxDownloading="" \
-    biu.download.saveURI="" \
-    biu.download.saveFileName="" \
-    biu.download.autoArchive="" \
-    biu.download.autoDeterTheSame="" \
-    biu.download.whatsUgoira="" \
-    biu.download.imageHost=""
+ENV sys.host="0.0.0.0:4001"
 ENTRYPOINT ["/Pixiv/main"]
