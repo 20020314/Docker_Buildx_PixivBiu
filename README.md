@@ -16,7 +16,7 @@
 
    `-e sys.host="0.0.0.0:4001"`
 
-**{ROOTPATH}/downloads路径不能修改**
+**如果你不使用aria，'{ROOTPATH}/downloads'路径不能修改**
 
    `-e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"`
 
@@ -38,11 +38,12 @@ docker run -d \
 
 ### 将在2.2.0a版本之后使用 
 
-国内镜像地址：将 `zzcabc/pixivbiu:latest` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest`
+#### 国内镜像地址：将 `zzcabc/pixivbiu:latest` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest`
 
 ### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
 
 ```sh
+docker run -d \
     --name pixivbiu \
     -p 本机端口:4001 \
     -e sys.debug=false \
@@ -71,8 +72,6 @@ docker run -d \
 
 ## 源码编译构建镜像的使用方式
 
-国内镜像地址：将 `zzcabc/pixivbiu:latest-src` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu-src:latest`
-
 ```sh
 docker run -d \
     --name pixivbiu \
@@ -84,6 +83,10 @@ docker run -d \
 ```
 
 ### 将在2.2.0a版本之后使用 
+
+#### 国内镜像地址：将 `zzcabc/pixivbiu:latest` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest`
+
+### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
 
 ```sh
     --name pixivbiu \
@@ -121,6 +124,41 @@ docker run -d \
 `/Pixiv/config.yml`                 配置文件(必须映射)
 
 `/Pixiv/usr/.token.json`            Token 存放位置(必须映射)
+
+# Aria的使用方法
+
+## Aria镜像
+推荐使用p3terx的Aria2Pro
+SECRET默认为p3terx
+
+```sh
+docker run -d \
+    --name aria2-pro \
+    --restart unless-stopped \
+    --log-opt max-size=1m \
+    -e PUID=$UID \
+    -e PGID=$GID \
+    -e UMASK_SET=022 \
+    -e RPC_SECRET=<TOKEN> \
+    -e RPC_PORT=6800 \
+    -e LISTEN_PORT=6888 \
+    -p 6800:6800 \
+    -p 6888:6888 \
+    -p 6888:6888/udp \
+    -v $PWD/aria2-config:/config \
+    -v $PWD/aria2-downloads:/downloads \
+    p3terx/aria2-pro
+```
+
+## 使用Aria需要更改的地方
+
+`biu.download.mode`         为  `aria`
+
+`biu.download.aria2Host`    为  `aria的ip:6800`
+
+`biu.download.aria2Secret`  为  `aria的secret`
+
+`biu.download.saveURI`      为  `/downloads`
 
 # [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)
 
