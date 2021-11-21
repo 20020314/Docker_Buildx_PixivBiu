@@ -1,9 +1,8 @@
-# It is the default configuration file for PixivBiu.
-# There is no English version yet... It will be available soon.
-# You can use the translation tool to read it, for now.
+# 如果你需要启动默认配置，请删除 `# ` !!!!!!!!!!!!!!!!!!!!!
 
 ## 系统相关 ##
-# sys.host 绝对不能改
+
+# sys.host 绝对不能改！！！！！！！！！！！！！！！！
 
 # sys.isDebug: false
   # 调试模式
@@ -57,7 +56,7 @@
 
 # biu.download.saveURI: "{ROOTPATH}/downloads/{KT}/"
 
-  # 如果docker运行 要修改{ROOTPATH}/downloads 目录绝对不能更改
+  # 如果docker运行 '{ROOTPATH}/downloads' 目录绝对不能更改
 
   # 下载保存路径，以 / 结尾
   # 不可使用 \ 符号，请将其替换为 / 或 \\
