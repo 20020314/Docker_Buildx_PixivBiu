@@ -152,7 +152,7 @@ docker run -d \
 
 ## 使用Aria需要更改的地方
 
-`biu.download.mode`         为  `aria`
+`biu.download.mode`         为  `aria2`
 
 `biu.download.aria2Host`    为  `aria的ip:6800`
 
