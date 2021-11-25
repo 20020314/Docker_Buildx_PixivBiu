@@ -36,7 +36,9 @@ jobs:
           IMAGE_NAME=pixivbiu
           ALI_ADD=registry.cn-hangzhou.aliyuncs.com
           GITHUB_VERSION=$(curl -sX GET "https://api.github.com/repos/txperl/PixivBiu/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
-          DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v2/repositories/zzcabc/pixivbiu/tags" | awk '{print $1230;exit}' FS='[""]')
+          DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v2/repositories/zzcabc/pixivbiu/tags" | awk '{print $610;exit}' FS='[""]')
+          echo ${GITHUB_VERSION}
+          echo ${DOCKERHUB_VERSION}
           TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${GITHUB_VERSION}"
           TAG_LATEST="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:latest"
           ALI_VERSION="${ALI_ADD}/${{ secrets.ALIYUN_NAMESPACES }}/${IMAGE_NAME}:${GITHUB_VERSION}"
