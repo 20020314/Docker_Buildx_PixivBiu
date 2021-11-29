@@ -26,7 +26,7 @@
 
 ## pyinstaller构建镜像的使用方式（默认拉取）
 
-## 国内镜像地址：将 `zzcabc/pixivbiu:latest` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest`
+### 国内镜像地址：将 `zzcabc/pixivbiu:latest` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest`
 
 ```sh
 docker run -d \
@@ -38,7 +38,7 @@ docker run -d \
     zzcabc/pixivbiu
 ```
 
-## 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
+### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
 
 ```sh
 docker run -d \
@@ -67,7 +67,7 @@ docker run -d \
     zzcabc/pixivbiu
 ```
 
-# 同样你也可以使用默认的配置形式启动容器
+### 同样你也可以使用默认的配置形式启动容器
 
 ```sh
 docker run -d \
@@ -80,7 +80,7 @@ docker run -d \
 
 ## 源码编译构建镜像的使用方式
 
-#### 国内镜像地址：将 `zzcabc/pixivbiu:latest` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest`
+### 国内镜像地址：将 `zzcabc/pixivbiu:latest-src` 换成 `registry.cn-hangzhou.aliyuncs.com/zzcabc/pixivbiu:latest-src`
 
 ```sh
 docker run -d \
@@ -120,7 +120,7 @@ docker run -d \
     zzcabc/pixivbiu:latest-src
 ```
 
-# 同样你也可以使用默认的配置形式启动容器
+### 同样你也可以使用默认的配置形式启动容器
 
 ```sh
 docker run -d \
