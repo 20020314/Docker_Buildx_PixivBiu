@@ -31,6 +31,7 @@
 ```sh
 docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/config.yml \
     -v 本机路径:/Pixiv/downloads \
@@ -43,6 +44,7 @@ docker run -d \
 ```sh
 docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -e sys.debug=false \
     -e sys.api=public \
@@ -72,6 +74,7 @@ docker run -d \
 ```sh
 docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/downloads \
     -v 本级路径:/Pixiv/usr/.token.json \
@@ -85,6 +88,7 @@ docker run -d \
 ```sh
 docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/config.yml \
     -v 本机路径:/Pixiv/downloads \
@@ -95,7 +99,9 @@ docker run -d \
 ### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
 
 ```sh
+docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -e sys.debug=false \
     -e sys.api=public \
@@ -125,6 +131,7 @@ docker run -d \
 ```sh
 docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/downloads \
     -v 本级路径:/Pixiv/usr/.token.json \
@@ -187,6 +194,7 @@ docker run -d \
 ```sh
 docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -e sys.debug=false \
     -e sys.api=public \
@@ -216,6 +224,7 @@ docker run -d \
 ```sh
 docker run -d \
     --name pixivbiu \
+    --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/downloads \
     -v 本级路径:/Pixiv/usr/.token.json \
