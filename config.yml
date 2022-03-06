@@ -1,17 +1,19 @@
-# 如果你需要启动默认配置，请删除 `# ` !!!!!!!!!!!!!!!!!!!!!
+# 如果你需要启动默认配置，请删除 `# ` ！！！！！！！！！！！！！！
 
 ## 系统相关 ##
+# sys.host 在docker环境中不可修改 ！！！！！！！！！！！！！！
+# sys.host: "127.0.0.1:4001" 
+  # 程序运行的地址，如果不是很懂请不要修改
+  # 不可带有 http:// 前缀
 
-# sys.host 绝对不能改！！！！！！！！！！！！！！！！
-
-# sys.isDebug: false
+# sys.debug: false
   # 调试模式
   # true 为开启；false 为关闭
 
-# sys.api: "public"
-  # 默认 api 模式
-  # public: 可以使用全功能，但必须需要代理（翻墙）
-  # byPassSni: 可以使用全功能，但无需代理（无需翻墙）
+# sys.apiRoute: "direct"
+  # 默认 api 线路
+  # direct: 稳定，需要代理（翻墙）
+  # bypassSNI: 稳定性一般，但无需代理（无需翻墙）
 
 # sys.proxy: ""
   # 本地代理服务监听地址
@@ -54,10 +56,8 @@
 # biu.download.maxDownloading: 8
   # 最大同时下载任务数
 
+# 在docker中 {ROOTPATH}/downloads 不可修改 ！！！！！！！！！！！
 # biu.download.saveURI: "{ROOTPATH}/downloads/{KT}/"
-
-  # 如果docker运行 '{ROOTPATH}/downloads' 目录绝对不能更改
-
   # 下载保存路径，以 / 结尾
   # 不可使用 \ 符号，请将其替换为 / 或 \\
   # 可选变量
@@ -104,3 +104,7 @@
   # https://i.pximg.net 官方图片服务器（需代理）
   # https://i.pixiv.cat 第三方反代图片服务器（需代理）
   # https://i.pixiv.re 第三方反代图片服务器（无需代理）
+
+
+# 私密
+# secret.key.apiSauceNAO: ""

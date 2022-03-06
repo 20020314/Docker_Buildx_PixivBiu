@@ -41,13 +41,14 @@ docker run -d \
 
 ### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
 
+#### 如果你使用环境变量传配置，请自行修改下方 ` -e ` 中的内容
 ```sh
 docker run -d \
     --name pixivbiu \
     --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -e sys.debug=false \
-    -e sys.api=public \
+    -e sys.apiRoute="direct" \
     -e sys.proxy= \
     -e sys.language= \
     -e sys.theme=multiverse \
@@ -98,13 +99,14 @@ docker run -d \
 
 ### 环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)使用了环境变量创建容器，可用不需要传入config.yml
 
+#### 如果你使用环境变量传配置，请自行修改下方 ` -e ` 中的内容
 ```sh
 docker run -d \
     --name pixivbiu \
     --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -e sys.debug=false \
-    -e sys.api=public \
+    -e sys.apiRoute="direct" \
     -e sys.proxy= \
     -e sys.language=zh \
     -e sys.theme=multiverse \
@@ -152,9 +154,9 @@ docker run -d \
 
 ## Aria镜像
 
-推荐使用p3terx的Aria2Pro
+### 推荐使用p3terx的Aria2Pro
 
-SECRET默认为p3terx
+### SECRET不配置默认为p3terx
 
 ```sh
 docker run -d \
@@ -170,8 +172,8 @@ docker run -d \
     -p 6800:6800 \
     -p 6888:6888 \
     -p 6888:6888/udp \
-    -v $PWD/aria2-config:/config \
-    -v $PWD/aria2-downloads:/downloads \
+    -v 本地路径/aria2-config:/config \
+    -v 本地路径/aria2-downloads:/downloads \
     p3terx/aria2-pro
 ```
 
@@ -185,51 +187,7 @@ docker run -d \
 
 `biu.download.saveURI`      为  `/downloads`
 
-# [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)
-
-如果你使用了环境变量创建容器，可用不需要传入config.yml
-
-环境变量具体参照[源码的配置](https://github.com/txperl/PixivBiu/blob/master/app/config/biu_default.yml)
-
-```sh
-docker run -d \
-    --name pixivbiu \
-    --user $(id -u):$(id -g) \
-    -p 本机端口:4001 \
-    -e sys.debug=false \
-    -e sys.api=public \
-    -e sys.proxy= \
-    -e sys.language= \
-    -e sys.theme=multiverse \
-    -e sys.autoOpen=true \
-    -e biu.search.maxThreads=8 \
-    -e biu.search.loadCacheFirst=true \
-    -e biu.download.mode=dl-single \
-    -e biu.download.aria2Host="localhost:6800" \
-    -e biu.download.aria2Secret="" \
-    -e biu.download.maxDownloading=8 \
-    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
-    -e biu.download.saveFileName="{title}_{work_id}" \
-    -e biu.download.autoArchive=true \
-    -e biu.download.autoDeterTheSame=true \
-    -e biu.download.whatsUgoira=webp \
-    -e biu.download.imageHost=""
-    -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
-    zzcabc/pixivbiu-test
-```
-
-**如果你使用了-e传参，即可不需要config.yml；当然，你也可以使用下方命令启动容器**
-
-```sh
-docker run -d \
-    --name pixivbiu \
-    --user $(id -u):$(id -g) \
-    -p 本机端口:4001 \
-    -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
-    zzcabc/pixivbiu-test
-```
+~~# [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)~~
 
 # TODO
 
