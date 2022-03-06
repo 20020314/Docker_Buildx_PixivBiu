@@ -1,3 +1,5 @@
+# 登录有问题，暂时无法解决
+
 # [Docker_Buildx_PixivBiu](https://hub.docker.com/r/zzcabc/pixivbiu) <-点击跳转DockerHub
 
 本项目使用Docker Buildx构建全平台镜像，支持linux/386、linux/amd64、linux/armv6、inux/armv7、linux/armv8、~~linux/ppc64le、linux/s390x~~框架；
