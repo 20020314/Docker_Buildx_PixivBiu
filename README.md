@@ -1,14 +1,12 @@
-# 登录有问题，暂时无法解决
-
 # [Docker_Buildx_PixivBiu](https://hub.docker.com/r/zzcabc/pixivbiu) <-点击跳转DockerHub
 
-本项目使用Docker Buildx构建全平台镜像，支持linux/386、linux/amd64、linux/armv6、inux/armv7、linux/armv8、~~linux/ppc64le、linux/s390x~~框架；
+本项目使用Docker Buildx构建全平台镜像，支持~linux/386~、linux/amd64、~linux/armv6~、inux/armv7、linux/armv8、~linux/ppc64le、linux/s390x~框架；
 
 使用pyinstaller和源码编译两种方式进行打包，pyinstaller构建采用alpine:latest作为底包，镜像体积缩减至40M；
 
 源码编译采用python:3.7.12-alpine3.14作为底包，镜像体积为180M+
 
-使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，构建时间大约需要**2小时**
+使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，构建时间大约需要**30分钟**
 
 # 使用方式
 
@@ -189,7 +187,7 @@ docker run -d \
 
 `biu.download.saveURI`      为  `/downloads`
 
-~~# [测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)~~
+# ~[测试地址](https://hub.docker.com/r/zzcabc/pixivbiu-test)~
 
 # TODO
 
