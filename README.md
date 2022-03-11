@@ -22,7 +22,10 @@
 
 将本项目的[config.yml](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/config.yml)直接可用
 
-[点击查看token的获取方式](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/getToken.md)
+~~[点击查看token的获取方式](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/getToken.md)~~
+
+**请使用客户端获取.token.json文件**
+
 
 ## pyinstaller构建镜像的使用方式（默认拉取）
 
