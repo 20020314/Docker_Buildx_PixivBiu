@@ -38,7 +38,7 @@ docker run -d \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/config.yml \
     -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
+    -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu
 ```
 
@@ -69,7 +69,7 @@ docker run -d \
     -e biu.download.whatsUgoira=webp \
     -e biu.download.imageHost="" \
     -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
+    -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu
 ```
 
@@ -81,7 +81,7 @@ docker run -d \
     --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
+    -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu
 ```
 
@@ -96,7 +96,7 @@ docker run -d \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/config.yml \
     -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
+    -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu:latest-src
 ```
 
@@ -127,7 +127,7 @@ docker run -d \
     -e biu.download.whatsUgoira=webp \
     -e biu.download.imageHost="" \
     -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
+    -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu:latest-src
 ```
 
@@ -139,7 +139,7 @@ docker run -d \
     --user $(id -u):$(id -g) \
     -p 本机端口:4001 \
     -v 本机路径:/Pixiv/downloads \
-    -v 本级路径:/Pixiv/usr/.token.json \
+    -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu:latest-src
 ```
 
