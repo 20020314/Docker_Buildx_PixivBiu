@@ -1,5 +1,7 @@
 # [Docker_Buildx_PixivBiu](https://hub.docker.com/r/zzcabc/pixivbiu) <-点击跳转DockerHub
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/txperl/PixivBiu?label=danmuji&style=flat-square)](https://github.com/txperl/PixivBiu/releases/latest) [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/zzcabc/pixivbiu?label=DockerHub&style=flat-square)](https://hub.docker.com/r/zzcabc/pixivbiu/tags?page=1&ordering=last_updated)
+
 本项目使用Docker Buildx构建全平台镜像，支持~linux/386~、linux/amd64、~linux/armv6~、inux/armv7、linux/armv8、~linux/ppc64le、linux/s390x~框架；
 
 使用pyinstaller和源码编译两种方式进行打包，pyinstaller构建采用alpine:latest作为底包，镜像体积缩减至40M；
