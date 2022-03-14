@@ -28,7 +28,6 @@ jobs:
         # ALI_ADD ：阿里镜像地址
         # GITHUB_VERSION ： 源码版本
         # DOCKERHUB_VERSION ： DockerHub 镜像版本
-        # DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v2/repositories/zzcabc/pixivbiu/tags" | awk '{print $614;exit}' FS='[""]')
         # TAG_VERSION ： 标签版本 zzcabc/pixivbiu:2.2.0a
         # TAG_LATEST ： 最新版本 zzcabc/pixivbiu:latest
         # ALI_VERSION ：
@@ -37,7 +36,7 @@ jobs:
           IMAGE_NAME=pixivbiu
           ALI_ADD=registry.cn-hangzhou.aliyuncs.com
           GITHUB_VERSION=$(curl -sX GET "https://api.github.com/repos/txperl/PixivBiu/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
-          
+          DOCKERHUB_VERSION=$(curl -sX GET "https://hub.docker.com/v2/repositories/zzcabc/pixivbiu/tags" | awk '{print $304;exit}' FS='[""]')
           echo ${GITHUB_VERSION}
           echo ${DOCKERHUB_VERSION}
           TAG_VERSION="${{ secrets.DOCKERHUB_USERNAME }}/${IMAGE_NAME}:${GITHUB_VERSION}"
