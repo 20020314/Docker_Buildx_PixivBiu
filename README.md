@@ -4,11 +4,12 @@
  这是Docker Hub的版本[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/zzcabc/pixivbiu?label=DockerHub&style=flat-square)](https://hub.docker.com/r/zzcabc/pixivbiu/tags?page=1&ordering=last_updated)
 
 
-本项目使用Docker Buildx构建全平台镜像，支持~linux/386~、linux/amd64、~linux/armv6~、inux/armv7、linux/armv8、~linux/ppc64le、linux/s390x~框架；
+本项目使用Docker Buildx构建全平台镜像，支持linux/amd64、linux/armv7、linux/armv8框架；不再对linux/386、linux/armv6、linux/ppc64le、linux/s390x架构支持
 
-使用pyinstaller和源码编译两种方式进行打包，pyinstaller构建采用alpine:latest作为底包，镜像体积缩减至40M；
-
-源码编译采用python:3.7.12-alpine3.14作为底包，镜像体积为180M+
+|构建方式|底包采用|Amd64镜像大小|
+|--|--|--|
+|pyinstaller|alpine:latest|39.1M|
+|源码构建|python:alpine3.14|200M|
 
 使用GitHub Action在中国时间 **0:00** 自动拉取[txperl/PixivBiu](https://github.com/txperl/PixivBiu)的源码进行构建Docker镜像，**但当源码版本和Docker镜像版本一致将不会构建镜像**，构建时间大约需要**30分钟**
 
