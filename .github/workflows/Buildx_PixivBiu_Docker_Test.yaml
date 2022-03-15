@@ -90,16 +90,3 @@ jobs:
           tags: |
             ${{ steps.prepare.outputs.tag_version }}
             ${{ steps.prepare.outputs.tag_latest }}
-
-      # # 构建并且推送
-      # - name: BuildPyinstaller and Push
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     platforms: linux/amd64,linux/arm/v7,linux/arm64
-      #     file: ./Dockerfile.pyinstallerbuild
-      #     context: .
-      #     push: true
-      #     tags: |
-      #       ${{ steps.prepare.outputs.tag_version }}
-      #       ${{ steps.prepare.outputs.tag_latest }}
-      #       ghcr.io/${{ steps.prepare.outputs.tag_version }}
