@@ -60,11 +60,11 @@ jobs:
         uses: docker/setup-buildx-action@v1
       
       # 登录到DockerHub
-      # - name: Login to DockerHub
-      #   uses: docker/login-action@v1
-      #   with:
-      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       # 登录到阿里镜像仓库
       # - name: Login To Alibaba Cloud Container Registry
@@ -80,23 +80,27 @@ jobs:
       #     password: ${{ secrets.TOKEN_GITHUB }}
 
       # 构建并且推送
-      # - name: BuildSrc and Push
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     platforms: linux/amd64
-      #     file: ./Dockerfile.test
-      #     context: .
-      #     push: false
-      #     tags: |
-      #       ${{ steps.prepare.outputs.tag_version }}
-      #       ${{ steps.prepare.outputs.tag_latest }}
+      - name: BuildPyinstaller and Push
+        id: platforms
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          file: ./Dockerfile.pyinstallerbuild
+          context: .
+          push: true
+          tags: |
+            ${{ steps.prepare.outputs.tag_version }}
+            ${{ steps.prepare.outputs.tag_latest }}
+            ${{ steps.prepare.outputs.platforms }}:${{ steps.platforms.platforms }}
 
-      - name: 构建镜像复制出来
-        run: |
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          docker run -d --platform=arm zzcabc/danmuji-test:latest-arm32
-          docker image ls
-          docker ps -a
+
+
+      # - name: 构建镜像复制出来
+      #   run: |
+      #     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      #     docker run -d --platform=arm zzcabc/danmuji-test:latest-arm32
+      #     docker image ls
+      #     docker ps -a
 
       # - name: 构建镜像复制出来
       #   run: |
