@@ -96,3 +96,13 @@ jobs:
           docker run -d --name pixivbiu zzcabc/pixivbiu
           docker cp pixivbiu:/Pixiv ./Pixiv_AMD64
           ls ./Pixiv_AMD64
+          tar -cvf amd64_$(GITHUB_VERSION).tar ./Pixiv_AMD64
+          ls
+
+      - name: Release and Done
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "amd64_$(GITHUB_VERSION).tar"
+          tag: ${{ steps.prepare.outputs.github_version }}
+          name: ${{ steps.prepare.outputs.github_version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
