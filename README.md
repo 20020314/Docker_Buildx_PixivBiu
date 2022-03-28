@@ -1,4 +1,6 @@
-# [Docker_Buildx_PixivBiu](https://hub.docker.com/r/zzcabc/pixivbiu) <-点击跳转DockerHub
+# Docker_Buildx_PixivBiu
+
+前往[Dockerhub](https://hub.docker.com/r/zzcabc/pixivbiu)  前往[Github](https://github.com/zzcabc/Docker_Buildx_PixivBiu)
 
 这是GitHub的版本[![GitHub release (latest by date)](https://img.shields.io/github/v/release/txperl/PixivBiu?label=PixivBiu&style=flat-square)](https://github.com/txperl/PixivBiu/releases/latest) 
  这是Docker Hub的版本[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/zzcabc/pixivbiu?label=DockerHub&style=flat-square)](https://hub.docker.com/r/zzcabc/pixivbiu/tags?page=1&ordering=last_updated)
