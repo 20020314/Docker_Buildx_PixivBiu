@@ -57,22 +57,22 @@ docker run -d \
     -p 本机端口:4001 \
     -e sys.debug=false \
     -e sys.apiRoute="direct" \
-    -e sys.proxy= \
-    -e sys.language= \
-    -e sys.theme=multiverse \
-    -e sys.autoOpen=true \
+    -e sys.proxy="" \
+    -e sys.language="" \
+    -e sys.theme="multiverse" \
     -e biu.search.maxThreads=8 \
     -e biu.search.loadCacheFirst=true \
-    -e biu.download.mode=dl-single \
+    -e biu.download.mode="dl-single" \
     -e biu.download.aria2Host="localhost:6800" \
     -e biu.download.aria2Secret="" \
+    -e biu.download.deterPaths=true \
     -e biu.download.maxDownloading=8 \
-    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
+    -e biu.download.saveURI="{ROOTPATH}/downloads/{date_today}/" \
     -e biu.download.saveFileName="{title}_{work_id}" \
     -e biu.download.autoArchive=true \
-    -e biu.download.autoDeterTheSame=true \
     -e biu.download.whatsUgoira=webp \
     -e biu.download.imageHost="" \
+    -e secret.key.apiSauceNAO="" \
     -v 本机路径:/Pixiv/downloads \
     -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu
@@ -115,22 +115,22 @@ docker run -d \
     -p 本机端口:4001 \
     -e sys.debug=false \
     -e sys.apiRoute="direct" \
-    -e sys.proxy= \
-    -e sys.language=zh \
-    -e sys.theme=multiverse \
-    -e sys.autoOpen=true \
+    -e sys.proxy="" \
+    -e sys.language="" \
+    -e sys.theme="multiverse" \
     -e biu.search.maxThreads=8 \
     -e biu.search.loadCacheFirst=true \
-    -e biu.download.mode=dl-single \
+    -e biu.download.mode="dl-single" \
     -e biu.download.aria2Host="localhost:6800" \
     -e biu.download.aria2Secret="" \
+    -e biu.download.deterPaths=true \
     -e biu.download.maxDownloading=8 \
-    -e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/" \
+    -e biu.download.saveURI="{ROOTPATH}/downloads/{date_today}/" \
     -e biu.download.saveFileName="{title}_{work_id}" \
     -e biu.download.autoArchive=true \
-    -e biu.download.autoDeterTheSame=true \
     -e biu.download.whatsUgoira=webp \
     -e biu.download.imageHost="" \
+    -e secret.key.apiSauceNAO="" \
     -v 本机路径:/Pixiv/downloads \
     -v 本机路径:/Pixiv/usr/.token.json \
     zzcabc/pixivbiu:latest-src

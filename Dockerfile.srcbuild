@@ -20,4 +20,6 @@ RUN apk add -U --no-cache tzdata git gcc libc-dev linux-headers jpeg-dev zlib-de
     rm -rf /tmp/*
 EXPOSE 4001
 ENV sys.host="0.0.0.0:4001"
+ENV sys.autoOpen=false
+ENV sys.ignoreOutdated=true
 ENTRYPOINT ["python","/Pixiv/main.py"]
