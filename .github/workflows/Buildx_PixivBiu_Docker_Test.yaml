@@ -94,6 +94,6 @@ jobs:
       - name: 构建镜像复制出来
         run: |
           docker build -f ./Dockerfile.test -t ${{ steps.prepare.outputs.tag_latest }} .
-          docker image ls
-          docker ps -a
+          docker run -d --name pixivbiu ${{ steps.prepare.outputs.tag_latest }}
+          docker cp pixivbiu:/Pixiv ./Pixiv_AMD64
           ls
