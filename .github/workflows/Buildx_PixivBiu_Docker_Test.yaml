@@ -93,7 +93,7 @@ jobs:
 
       - name: 构建镜像复制出来
         run: |
-          docker build -t ${{ steps.prepare.outputs.tag_latest }} .
+          docker build -f ./Dockerfile.test -t ${{ steps.prepare.outputs.tag_latest }} .
           docker image ls
           docker ps -a
           ls
