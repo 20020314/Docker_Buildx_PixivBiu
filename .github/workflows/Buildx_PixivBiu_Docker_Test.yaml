@@ -93,16 +93,19 @@ jobs:
 
       - name: 构建镜像复制出来
         run: |
-          docker run -d --name pixivbiu zzcabc/pixivbiu
-          docker cp pixivbiu:/Pixiv ./Pixiv_AMD64
+          docker run -d --name amd64 zzcabc/pixivbiu
+          docker cp amd64:/Pixiv ./Pixiv_AMD64
           ls ./Pixiv_AMD64
           tar -cvf amd64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_AMD64
+          docker run -d --name arm64 zzcabc/pixivbiu --platform=arm64
+          docker cp arm64:/Pixiv ./Pixiv_ARM64
+          tar -cvf arm64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_ARM64
           ls
 
-      - name: Upload firmware to release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.prepare.outputs.github_version }}
-          files: amd64_${{ steps.prepare.outputs.github_version }}.tar
+      # - name: Upload firmware to release
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ steps.prepare.outputs.github_version }}
+      #     files: amd64_${{ steps.prepare.outputs.github_version }}.tar
