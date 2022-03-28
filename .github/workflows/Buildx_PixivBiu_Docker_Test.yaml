@@ -99,9 +99,10 @@ jobs:
           tar -cvf amd64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_AMD64
           ls
 
-      - name: Release and Done
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "amd64_${{ steps.prepare.outputs.github_version }}.tar"
-          tag: ${{ steps.prepare.outputs.github_version }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload firmware to release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.prepare.outputs.github_version }}
+        files: amd64_${{ steps.prepare.outputs.github_version }}.tar
