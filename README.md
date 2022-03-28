@@ -15,22 +15,18 @@
 
 # 使用方式
 
-在启动镜像之前，你需要准备[config.yml](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/config.yml)配置文件以及[.token.json](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/.token.json)的用户登录token
-
-**需要注意sys.host虽然可以传入，但是不建议更改，如果更改无法使用概不负责**
-
-   `-e sys.host="0.0.0.0:4001"`
-
-**如果你不使用aria，'{ROOTPATH}/downloads'路径不能修改**
-
-   `-e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"`
-
-将本项目的[config.yml](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/config.yml)直接可用
-
-~~[点击查看token的获取方式](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/getToken.md)~~
-
+在启动镜像之前，你需要准备[.token.json](https://github.com/zzcabc/Docker_Buildx_PixivBiu/blob/master/.token.json)的用户登录token
 **请使用客户端获取.token.json文件**
 
+**注意，某些环境变量不建议修改**
+
+| 环境变量 | 注意事项 |
+| ---    |  ---       |
+|`-e sys.host="0.0.0.0:4001"` |如果你想在docker外访问，请不要传入改环境变量|
+|`-e sys.autoOpen=false`|反正docker内也没提供浏览器窗口，所以这项传了没用|
+|`-e sys.ignoreOutdated=true`|你敢改为`false`，容器就敢不启动|
+|`-e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"`| 如果不使用aria2，**`{ROOTPATH}/downloads`是不能修改**|
+|`-e biu.download.saveURI="{ROOTPATH}/downloads/{KT}/"`| 使用aria2，请**改为`/downloads`**|
 
 ## pyinstaller构建镜像的使用方式（默认拉取）
 
