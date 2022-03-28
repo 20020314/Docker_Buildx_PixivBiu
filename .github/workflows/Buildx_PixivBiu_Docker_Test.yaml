@@ -94,7 +94,9 @@ jobs:
       - name: 构建镜像复制出来
         run: |
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          docker run --rm -t zzcabc/pixivbiu uname -m
+          docker run -d --platform=arm64 zzcabc/pixivbiu
+          docker image ls
+          docker ps -a
 
       # - name: 构建镜像复制出来
       #   run: |
