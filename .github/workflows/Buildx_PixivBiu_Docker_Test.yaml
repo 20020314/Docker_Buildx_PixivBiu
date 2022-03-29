@@ -79,31 +79,18 @@ jobs:
       #     username: ${{ github.actor }}
       #     password: ${{ secrets.TOKEN_GITHUB }}
 
-      # 构建并且推送
-      # - name: BuildPyinstaller and Push
-      #   id: platforms
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     platforms: linux/amd64,linux/arm/v7,linux/arm64
-      #     file: ./Dockerfile.pyinstallerbuild
-      #     context: .
-      #     push: true
-      #     tags: |
-      #       ${{ steps.prepare.outputs.tag_version }}
-      #       ${{ steps.prepare.outputs.tag_latest }}
-
       - name: 构建镜像复制出来
         run: |
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker run -d --name amd64 --platform=amd64 zzcabc/pixivbiu
-          docker cp amd64:/Pixiv ./Pixiv_AMD64
-          tar -cvf amd64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_AMD64
+          docker cp amd64:/Pixiv ./x86_64
+          tar -cvf x86_64_${{ steps.prepare.outputs.github_version }}.tar ./x86_64
           docker run -d --name arm64 --platform=arm64 zzcabc/pixivbiu
-          docker cp arm64:/Pixiv ./Pixiv_ARM64
-          tar -cvf arm64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_ARM64
+          docker cp arm64:/Pixiv ./arm64
+          tar -cvf arm64_${{ steps.prepare.outputs.github_version }}.tar ./arm64
           docker run -d --name arm --platform=arm zzcabc/pixivbiu
-          docker cp arm:/Pixiv ./Pixiv_ARM
-          tar -cvf arm_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_ARM
+          docker cp arm:/Pixiv ./arm
+          tar -cvf arm_${{ steps.prepare.outputs.github_version }}.tar ./arm
 
       - name: Upload firmware to release
         uses: softprops/action-gh-release@v1
@@ -112,6 +99,19 @@ jobs:
         with:
           tag_name: ${{ steps.prepare.outputs.github_version }}
           files: |
-            amd64_${{ steps.prepare.outputs.github_version }}.tar
+            x86_64_${{ steps.prepare.outputs.github_version }}.tar
             arm64_${{ steps.prepare.outputs.github_version }}.tar
             arm_${{ steps.prepare.outputs.github_version }}.tar
+
+      # 构建并且推送
+      - name: BuildPyinstaller and Push
+        id: platforms
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/amd64
+          file: ./Dockerfile.Update
+          context: .
+          push: true
+          tags: |
+            ${{ steps.prepare.outputs.tag_version }}
+            ${{ steps.prepare.outputs.tag_latest }}

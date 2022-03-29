@@ -15,11 +15,13 @@ else
     # 将当前版本写入old文件
     echo ${LATEST_VERSION} > old
     # 下载版本
-    wget https://github.do/https://github.com/zzcabc/Docker_Buildx_PixivBiu/releases/download/$(cat old)/amd64_$(cat old).tar
+    wget https://github.do/https://github.com/zzcabc/Docker_Buildx_PixivBiu/releases/download/$(cat old)/$(uname -m)_$(cat old).tar
     # 解压最新版本
-    tar -zxvf *.tar
-
-    # 删除下载的压缩文件
+    tar -xvf *.tar
+    # 将文件夹内的东西复制到/Pixiv文件夹下
+    cp $(uname -m)/* /Pixiv/*
+    # 删除解压缩的文件夹和压缩包
+    rm -rf $(uname -m)/ *.tar
     echo "Download completed"
 fi
 
@@ -32,13 +34,15 @@ if [ -f "/Pixiv/new" ];then
         echo "Version being updated"
         # 不一样，获取最新的版本
         # 下载新的版本
-        wget https://github.do/https://github.com/zzcabc/Docker_Buildx_PixivBiu/releases/download/$(cat old)/amd64_$(cat old).tar
+        wget https://github.do/https://github.com/zzcabc/Docker_Buildx_PixivBiu/releases/download/$(cat old)/$(uname -m)_$(cat old).tar
         # 解压最新版本
-        tar -zxvf *.tar
-
+        tar -xvf *.tar
+        # 将文件夹内的东西复制到/Pixiv文件夹下
+        cp $(uname -m)/* /Pixiv/*
+        # 删除解压缩的文件夹和压缩包
+        rm -rf $(uname -m)/ *.tar
         # 并将new改名为old
         mv new old
-
         echo "Update completed"
     fi
 fi
