@@ -1,5 +1,7 @@
 FROM alpine:latest
 RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone && \
     git clone --depth=1 https://github.com/txperl/PixivBiu.git && \
     mkdir Pixiv && \
     mkdir /PixivBiu/.pkg/code && \
@@ -15,10 +17,7 @@ RUN apk add -U --no-cache python3 python3-dev py3-pip tzdata git gcc libc-dev mu
     pip install pyinstaller --no-cache-dir && \
     python3 /PixivBiu/.pkg/py-pkger.py auto && \
     mv /PixivBiu/.pkg/dist/* /Pixiv  && \
-    rm -rf PixivBiu/ && \
-    rm /Pixiv/config.yml && \
-    rm /Pixiv/LICENSE && \
-    rm /Pixiv/README.md && \
+    rm -rf PixivBiu/ /Pixiv/config.yml /Pixiv/LICENSE /Pixiv/README.md && \
     apk del python3 python3-dev py3-pip tzdata git gcc libc-dev musl-dev linux-headers jpeg-dev zlib-dev && \
     rm -rf /var/cache/apk/* && \
     rm -rf /root/.cache && \
