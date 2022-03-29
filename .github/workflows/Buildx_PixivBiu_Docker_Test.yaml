@@ -92,32 +92,26 @@ jobs:
       #       ${{ steps.prepare.outputs.tag_version }}
       #       ${{ steps.prepare.outputs.tag_latest }}
 
+      - name: 构建镜像复制出来
+        run: |
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker run -d --name amd64 --platform=amd64 zzcabc/pixivbiu
+          docker cp amd64:/Pixiv ./Pixiv_AMD64
+          tar -cvf amd64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_AMD64
+          docker run -d --name arm64 --platform=arm64 zzcabc/pixivbiu
+          docker cp arm64:/Pixiv ./Pixiv_ARM64
+          tar -cvf arm64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_ARM64
+          docker run -d --name arm --platform=arm zzcabc/pixivbiu
+          docker cp arm:/Pixiv ./Pixiv_ARM
+          tar -cvf arm_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_ARM
 
-
-
-      # - name: 构建镜像复制出来
-      #   run: |
-      #     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-      #     docker run -d --platform=arm zzcabc/danmuji-test:latest-arm32
-      #     docker image ls
-      #     docker ps -a
-
-      # - name: 构建镜像复制出来
-      #   run: |
-      #     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-      #     docker run -d --name amd64 zzcabc/pixivbiu
-      #     docker cp amd64:/Pixiv ./Pixiv_AMD64
-      #     ls ./Pixiv_AMD64
-      #     tar -cvf amd64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_AMD64
-      #     docker run -d --name arm64 --platform=arm64 zzcabc/pixivbiu 
-      #     docker cp arm64:/Pixiv ./Pixiv_ARM64
-      #     tar -cvf arm64_${{ steps.prepare.outputs.github_version }}.tar ./Pixiv_ARM64
-      #     ls
-
-      # - name: Upload firmware to release
-      #   uses: softprops/action-gh-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ steps.prepare.outputs.github_version }}
-      #     files: amd64_${{ steps.prepare.outputs.github_version }}.tar
+      - name: Upload firmware to release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.prepare.outputs.github_version }}
+          files: |
+            amd64_${{ steps.prepare.outputs.github_version }}.tar
+            arm64_${{ steps.prepare.outputs.github_version }}.tar
+            arm_${{ steps.prepare.outputs.github_version }}.tar
