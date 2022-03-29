@@ -5,12 +5,12 @@ on:
       - main
     paths:
       - README.md
-      - .github/workflows/Update_docker_readme.yaml
+      - .github/workflows/UPDATE_DOCKER_README.yaml
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    name: 更新DockerHub简介
+    name: UPDATE_DOCKER_README
     env:
       IMAGE_NAME: pixivbiu
     steps:
