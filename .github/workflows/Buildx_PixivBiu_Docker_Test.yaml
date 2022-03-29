@@ -80,18 +80,18 @@ jobs:
       #     password: ${{ secrets.TOKEN_GITHUB }}
 
       # 构建并且推送
-      - name: BuildPyinstaller and Push
-        id: platforms
-        uses: docker/build-push-action@v2
-        with:
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
-          file: ./Dockerfile.pyinstallerbuild
-          context: .
-          push: true
-          tags: |
-            ${{ steps.prepare.outputs.tag_version }}
-            ${{ steps.prepare.outputs.tag_latest }}
-            ${{ steps.prepare.outputs.platforms }}:${{ steps.platforms.platforms }}
+      # - name: BuildPyinstaller and Push
+      #   id: platforms
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     platforms: linux/amd64,linux/arm/v7,linux/arm64
+      #     file: ./Dockerfile.pyinstallerbuild
+      #     context: .
+      #     push: true
+      #     tags: |
+      #       ${{ steps.prepare.outputs.tag_version }}
+      #       ${{ steps.prepare.outputs.tag_latest }}
+
 
 
 
