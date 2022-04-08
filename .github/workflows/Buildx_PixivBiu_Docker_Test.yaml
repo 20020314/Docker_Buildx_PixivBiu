@@ -72,36 +72,12 @@ jobs:
       #     docker login -u ${{ secrets.ALIYUN_USERNAME }} -p ${{ secrets.ALIYUN_PWD }} registry.cn-hangzhou.aliyuncs.com
       
       # 登录到ghcr.io
-      # - name: Login to Ghcr.io
-      #   uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-      #   with:
-      #     registry: ghcr.io
-      #     username: ${{ github.actor }}
-      #     password: ${{ secrets.TOKEN_GITHUB }}
-
-      - name: 构建镜像复制出来
-        run: |
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          docker run -d --name amd64 --platform=amd64 zzcabc/pixivbiu
-          docker cp amd64:/Pixiv ./x86_64
-          tar -cvf x86_64_${{ steps.prepare.outputs.github_version }}.tar ./x86_64
-          docker run -d --name arm64 --platform=arm64 zzcabc/pixivbiu
-          docker cp arm64:/Pixiv ./arm64
-          tar -cvf arm64_${{ steps.prepare.outputs.github_version }}.tar ./arm64
-          docker run -d --name arm --platform=arm zzcabc/pixivbiu
-          docker cp arm:/Pixiv ./arm
-          tar -cvf arm_${{ steps.prepare.outputs.github_version }}.tar ./arm
-
-      - name: Upload firmware to release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to Ghcr.io
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-          tag_name: ${{ steps.prepare.outputs.github_version }}
-          files: |
-            x86_64_${{ steps.prepare.outputs.github_version }}.tar
-            arm64_${{ steps.prepare.outputs.github_version }}.tar
-            arm_${{ steps.prepare.outputs.github_version }}.tar
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN_GITHUB }}
 
       # 构建并且推送
       - name: BuildPyinstaller and Push
@@ -109,7 +85,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           platforms: linux/amd64
-          file: ./Dockerfile.Update
+          file: ./Dockerfile.test
           context: .
           push: true
           tags: |
