@@ -49,17 +49,17 @@ biu.search.loadCacheFirst: true
 
 
 ## 下载相关 ##
-biu.download.mode: "dl-single"
+biu.download.mode: "aria2"
   # 下载模式
   # dl-single: 程序单线程下载
   # aria2: 使用 aria2 下载，如果启用此项，还需填写下方的 aria2Host、aria2Secret
 
-biu.download.aria2Host: ""
+biu.download.aria2Host: "aria2-pro:6800"
   # aria2 RPC 监听地址，如 localhost:6800
   # 下载时 dir, out, all-proxy, max-tries, check-certificate 配置项会由程序决定
   # 其余均为默认或自定义内容
 
-biu.download.aria2Secret: ""
+biu.download.aria2Secret: "linmi"
   # aria2 RPC 密钥，如未设置请留空
 
 biu.download.deterPaths: true
@@ -76,7 +76,7 @@ biu.download.deterPaths: true
 biu.download.maxDownloading: 8
   # 最大同时下载任务数
 
-biu.download.saveURI: "{ROOTPATH}/downloads/{date_today}/"
+biu.download.saveURI: "/home/downloads/{date_today}/"
   # 下载保存路径，以 / 结尾
   # 不可使用 \ 符号，请将其替换为 / 或 \\
   # 可选变量
